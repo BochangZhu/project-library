@@ -11,8 +11,8 @@
 
 h1 {
     font-size: 50px;
-    &+p {
-        font-size: 35px;
+    &+p, &~button {
+        font-size: 21.5px;
     }
 }
 
@@ -63,17 +63,32 @@ body {
                 border-radius: 50px;
                 padding: 10px;
                 width: min-content;
+                height: auto;
             }
-            .toggle {
+            label.toggle {
                 position: relative;
-                background: linear-gradient(to right, #a8eb1260, #00bf7260, #00879360, #004d7a60, #05193760);
-                border-radius: 30px;
                 width: 35%;
+                height: 60%;
+                cursor: pointer;
+                transition: 0.4 ease-out;
                 input{
                     width: 0;
                     height: 0;
+                    &:checked + span.slider::before {
+                        left: calc(100% - 45% - 5%);
+                    }
                 }
-                .slider {
+                span.slider {
+                    position:absolute;
+                    left: 0;
+                    top: 0;
+                    display: block;
+                    height: 100%;
+                    width: 100%;   
+                    background: linear-gradient(to right, rgba(121, 172, 12, 0.533), #00bf7288 30%, #00879388, #004d7a88 70%, #05193788);
+                    border-radius: 30px;
+                }
+                span.slider::before{
                     top: 10%;
                     left: 5%;
                     content: "";
@@ -82,8 +97,15 @@ body {
                     height: 80%;
                     border-radius: 30px;
                     background: linear-gradient(45deg,#f0acf7, #acf7f0, #f7f0ac);
+                    transition: 0.2s ease-out;
                 }
             }
         }
     }
+}
+
+.append {
+    padding: 5px;
+    border-radius: 30px;
+    background-color: rgba(3, 162, 186, 0.2);
 }
