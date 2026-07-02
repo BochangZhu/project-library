@@ -1,4 +1,4 @@
-/* css reset */
+    /* css reset */
 
 * {
     margin: 0;
@@ -20,7 +20,7 @@ body {
     background:url(./asset/background_img.jpg) no-repeat 0% 0% / cover;
     width: 100vw;
     height: 100vh;
-    grid-template-rows: 1fr 1fr 10fr 1fr;
+    grid-template-rows: 1fr 10fr 2fr;
     display: grid;
     align-items: center;
     justify-items: center;
@@ -28,7 +28,7 @@ body {
 }
 
 .grid-container {
-    
+    position:relative;
     place-self: stretch;
     padding: 50px;
     display: grid;
@@ -38,7 +38,7 @@ body {
     overflow-y: auto;
 
     .book-card {
-        background: linear-gradient(to right, #5cdb9533, #05386b33);
+        background: linear-gradient(to right, #fdcf5840, #ff000040);
         border-radius: 30px;
         font-size: 1.75rem;
         font-weight: bold;
@@ -46,6 +46,9 @@ body {
         border: 2px dashed blue;
         padding: 10px 10px 0 10px;
 
+        &.read {
+            background: linear-gradient(to right, #5cdb9533, #05386b33);
+        }
 
         p:not(.title) {
             font-size: 1.45rem;
@@ -104,8 +107,21 @@ body {
     }
 }
 
-.append {
+button.append {
+    font-size: 1.5rem;
+    height: 50%;
+    width: 10%;
     padding: 5px;
     border-radius: 30px;
-    background-color: rgba(3, 162, 186, 0.2);
+    background: linear-gradient(to right, #ebe717A8, #7ec6bcA8);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.75);
+    transition: box-shadow 0.2s, transform 0.1s;
+    &:hover {
+        box-shadow: 0px 5px 20px 0px #ebe717A8;
+    }
+    &:active {
+        box-shadow: none;
+        transform: translateY(3px);
+    }
+
 }

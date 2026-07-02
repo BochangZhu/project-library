@@ -12,37 +12,28 @@
 </head>
 <body>
     <h1>Welcome to Virtual Book Library!</h1>
-    <p>Ready to add a new favorite book?   Or just remove some of them!</p>
     <div class="grid-container">
-        <div class="book-card" id="unique-id">
-            <p class="title">Title</p>
-            <p class="name">Cat's Adventure</p>
-            <p class="title">Author</p>
-            <p class="author">Lucas</p>
-            <p class="title">Pages</p>
-            <p class="pages">1000</p>
-            <label class="toggle">
-                <input type="checkbox" id="checkbox" name="checkbox">
-                <span class="slider"></span>
-            </label>
-        </div>
 
-        <div class="book-card" id="unique-id">
-            <p class="title">Title</p>
-            <p class="name">Dog's Adventure</p>
-            <p class="title">Author</p>
-            <p class="author">FWWWW</p>
-            <p class="title">Pages</p>
-            <p class="pages">123</p>
-            <div class="control">
-                <label class="toggle">
-                    <input type="checkbox" id="checkbox" name="checkbox">
-                    <span class="slider"></span>
-                </label>
-                <button class="remove">❌</button>
+        <template>
+            <div class="book-card">
+
+                <p class="title">Title</p>
+                <p class="name"></p>
+                <p class="title">Author</p>
+                <p class="author"></p>
+                <p class="title">Pages</p>
+                <p class="pages"></p>
+
+                <div class="control">
+                    <label class="toggle">
+                        <input type="checkbox" id="checkbox" name="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <button class="remove">❌</button>
+                </div>
             </div>
-            
-        </div>
+        </template>
+
     </div>
 
     <button class="append">Add a New Book</button>
