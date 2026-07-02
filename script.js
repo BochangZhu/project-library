@@ -1,9 +1,12 @@
-
+// Get node objects
 const library = document.querySelector(".grid-container");
 const bookCardTemp = library.querySelector("template");
+const appendBtn = document.querySelector("button.append");
 
+// Book storage list
 const myLibrary = [];
 
+// Book Prototype to create book objs
 function Book(title = "No Name", author = "anonymous", pages = "-1", read= false, time_added) {
     this.title = title;
     this.author = author;
@@ -17,7 +20,7 @@ function addBookToLibrary() {
     // track time added
 }
 
-
+// Add/remove hint paragraph
 function checkLibEmpty(){
     if (library.children.length == 1) {
         const hintPara = document.createElement("p");
@@ -25,6 +28,11 @@ function checkLibEmpty(){
         hintPara.classList.add("hint");
         hintPara.setAttribute("style", "position: absolute; left: 20%; top: 50%; font-size: 3.5rem");
         library.appendChild(hintPara);
+    }
+
+    else {
+        const hintDel = library.querySelector(".hint");
+        if (hintDel) hintDel.remove();
     }
 }
 
