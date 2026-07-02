@@ -6,12 +6,42 @@
     <title>Document</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to Virtual Book Library</h1>
-    <p>Click the button below to add book!</p>
+    <h1>Welcome to Virtual Book Library!</h1>
+    <p>Ready to add a new favorite book?   Or remove the ones you don't need!</p>
     <div class="grid-container">
-        <div class="book-card" id="unique-id"></div>
+        <div class="book-card" id="unique-id">
+            <p class="title">Title</p>
+            <p class="name">Cat's Adventure</p>
+            <p class="title">Author</p>
+            <p class="author">Lucas</p>
+            <p class="title">Pages</p>
+            <p class="pages">1000</p>
+            <label class="toggle">
+                <input type="checkbox" id="checkbox" name="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="book-card" id="unique-id">
+            <p class="title">Title</p>
+            <p class="name">Dog's Adventure</p>
+            <p class="title">Author</p>
+            <p class="author">FWWWW</p>
+            <p class="title">Pages</p>
+            <p class="pages">123</p>
+            <label class="toggle">
+                <input type="checkbox" id="checkbox" name="checkbox">
+                <span class="slider"></span>
+            </label>
+            
+        </div>
     </div>
+
+    <button class="append">Add a New Book</button>
 </body>
 </html>
