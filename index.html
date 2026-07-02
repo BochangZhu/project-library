@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>Welcome to Virtual Book Library!</h1>
-    <p>Ready to add a new favorite book?   Or remove the ones you don't need!</p>
+    <p>Ready to add a new favorite book?   Or just remove some of them!</p>
     <div class="grid-container">
         <div class="book-card" id="unique-id">
             <p class="title">Title</p>
@@ -34,10 +34,13 @@
             <p class="author">FWWWW</p>
             <p class="title">Pages</p>
             <p class="pages">123</p>
-            <label class="toggle">
-                <input type="checkbox" id="checkbox" name="checkbox">
-                <span class="slider"></span>
-            </label>
+            <div class="control">
+                <label class="toggle">
+                    <input type="checkbox" id="checkbox" name="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <button class="remove">❌</button>
+            </div>
             
         </div>
     </div>
