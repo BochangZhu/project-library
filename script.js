@@ -6,7 +6,7 @@ const dialog = document.querySelector("dialog");
 const form = dialog.querySelector("form");
 
 // Book storage array
-const myLibrary = [];
+let myLibrary = [];
 
 // Book Prototype to create book objs
 function Book(title, author, pages, read, timeStr, id) {
@@ -83,8 +83,24 @@ function updateLibraryDisplay(){
             tempBookCard.querySelector("input").checked = true;
         }
 
+        // add eventlistener for read & remove button
         tempBookCard.querySelector("input").addEventListener("change", () => {
             bookCardNode.classList.toggle("read");
+        });
+
+        const cancelDialog = tempBookCard.querySelector("dialog");
+        tempBookCard.querySelector(".bookTitle").textContent = bookObj.title + "?";
+
+        tempBookCard.querySelector(".remove").addEventListener("click", ()=> {
+            cancelDialog.showModal();
+        })
+
+        cancelDialog.addEventListener("close", ()=>{
+            // perform deletion
+            if (cancelDialog.returnValue) {
+                myLibrary = myLibrary.filter(bookObj => bookObj.id != bookCardNode.id);
+                updateLibraryDisplay();
+            }
         });
 
         // set id
