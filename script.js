@@ -5,21 +5,37 @@ const appendBtn = document.querySelector("button.append");
 const dialog = document.querySelector("dialog");
 const form = dialog.querySelector("form");
 
-// Book storage list
+// Book storage array
 const myLibrary = [];
 
 // Book Prototype to create book objs
-function Book(title = "No Name", author = "anonymous", pages = "-1", read= false, time_added) {
+function Book(title, author, pages, read, timeStr, id) {
     this.title = title;
     this.author = author;
     this.page = pages;
     this.read = read;
-    this.time_added = time_added;
+    this.timeStr = timeStr;
+    this.id = id;
 }
 
-function addBookToLibrary() {
-    //... add book to library list
-    // track time added
+// Create a book obj and store it in the storage arr
+function addBookToLibrary(title, author, pages, read, timeObj, id) {
+    // process timeObj to get timestring
+    const formatter = new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        weekday: "short"
+    });
+    const timeStr = formatter.format(timeObj);
+
+    // create Book obj
+    const tempBookObj = new Book(title, author, pages, read, timeStr, id);
+
+    // append Book obj
+    myLibrary.push(tempBookObj);
 }
 
 // Add/remove hint paragraph
@@ -38,9 +54,56 @@ function checkLibEmpty(){
     }
 }
 
+// iterate storage arr and display book
+function updateLibrary(){
+    // clean all book-cards first
+    const childArr = Array.from(library.children);
+    childArr.forEach(child => {
+        if (child.tagName == "DIV") {
+            child.remove();
+        }
+    });
+
+    myLibrary.forEach(bookObj => {
+
+        // clone a node from template
+        const tempBookCard = bookCardTemp.content.cloneNode(true);
+
+        // populate the text fields
+        tempBookCard.querySelector(".name").textContent = bookObj.title;
+        tempBookCard.querySelector(".author").textContent = bookObj.author;
+        tempBookCard.querySelector(".pages").textContent = bookObj.page;
+        tempBookCard.querySelector(".time").textContent = bookObj.timeStr;
+
+        // toggle read attr and check the box
+        if (bookObj.read) {
+            tempBookCard.classList.add("read");
+            tempBookCard.querySelector("input").checked = true;
+        }
+        // set id
+        tempBookCard.id = bookObj.id;
+
+    })
+}
+
+
+// open up the modal
 appendBtn.addEventListener("click", (event) => {
     dialog.showModal();
 })
+
+dialog.addEventListener("close", ()=> {
+    if (dialog.returnValue) {
+        const fdata = new FormData(form);
+        const title = fdata.get('title');
+        const author = fdata.get('author');
+        const page = fdata.get('page');
+        const read = fdata.has('read');
+        const currTime = new Date();
+        const id = crypto.randomUUID();
+    }
+})
+
 
 checkLibEmpty();
 
