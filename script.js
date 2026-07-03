@@ -69,6 +69,7 @@ function updateLibraryDisplay(){
 
         // clone a node from template
         const tempBookCard = bookCardTemp.content.cloneNode(true);
+        const bookCardNode = tempBookCard.querySelector(".book-card");
 
         // populate the text fields
         tempBookCard.querySelector(".name").textContent = bookObj.title;
@@ -78,11 +79,16 @@ function updateLibraryDisplay(){
 
         // toggle read attr and check the box
         if (bookObj.read) {
-            tempBookCard.classList.add("read");
+            bookCardNode.classList.add("read");
             tempBookCard.querySelector("input").checked = true;
         }
+
+        tempBookCard.querySelector("input").addEventListener("change", () => {
+            bookCardNode.classList.toggle("read");
+        });
+
         // set id
-        tempBookCard.id = bookObj.id;
+        bookCardNode.id = bookObj.id;
 
         library.appendChild(tempBookCard);
     })
