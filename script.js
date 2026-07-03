@@ -36,6 +36,9 @@ function checkLibEmpty(){
     }
 }
 
+appendBtn.addEventListener("click", (event) => {
+    
+})
 
 checkLibEmpty();
 
