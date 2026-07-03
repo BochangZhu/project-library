@@ -2,6 +2,8 @@
 const library = document.querySelector(".grid-container");
 const bookCardTemp = library.querySelector("template");
 const appendBtn = document.querySelector("button.append");
+const dialog = document.querySelector("dialog");
+const form = dialog.querySelector("form");
 
 // Book storage list
 const myLibrary = [];
@@ -37,7 +39,7 @@ function checkLibEmpty(){
 }
 
 appendBtn.addEventListener("click", (event) => {
-    
+    dialog.showModal();
 })
 
 checkLibEmpty();
