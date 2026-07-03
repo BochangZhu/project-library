@@ -55,7 +55,7 @@ function checkLibEmpty(){
 }
 
 // iterate storage arr and display book
-function updateLibrary(){
+function updateLibraryDisplay(){
     // clean all book-cards first
     const childArr = Array.from(library.children);
     childArr.forEach(child => {
@@ -64,6 +64,7 @@ function updateLibrary(){
         }
     });
 
+    // iterate over library arr
     myLibrary.forEach(bookObj => {
 
         // clone a node from template
@@ -83,7 +84,10 @@ function updateLibrary(){
         // set id
         tempBookCard.id = bookObj.id;
 
+        library.appendChild(tempBookCard);
     })
+
+    checkLibEmpty();
 }
 
 
@@ -94,6 +98,7 @@ appendBtn.addEventListener("click", (event) => {
 
 dialog.addEventListener("close", ()=> {
     if (dialog.returnValue) {
+        // fetch data from Form
         const fdata = new FormData(form);
         const title = fdata.get('title');
         const author = fdata.get('author');
@@ -101,9 +106,17 @@ dialog.addEventListener("close", ()=> {
         const read = fdata.has('read');
         const currTime = new Date();
         const id = crypto.randomUUID();
+
+        // call helper func
+        addBookToLibrary(title, author, page, read, currTime, id);
+
+        updateLibraryDisplay();
     }
+
+    form.reset();
+
 })
 
-
+// Check intial empty state
 checkLibEmpty();
 

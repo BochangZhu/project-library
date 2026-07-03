@@ -28,7 +28,7 @@ body {
 }
 
 .grid-container {
-    position:relative;
+    position: relative;
     place-self: stretch;
     padding: 50px;
     display: grid;
