@@ -4,7 +4,7 @@ A vanilla HTML, CSS, and JavaScript project from [The Odin Project](https://www.
 
 ## Video Demo
 
-
+https://github.com/user-attachments/assets/323dbc92-01d2-4560-a6a1-fc9cca1002f9
 
 ## Features
 
