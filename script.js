@@ -9,50 +9,63 @@ const form = dialog.querySelector("form");
 let myLibrary = [];
 
 // Book Prototype to create book objs
-function Book(title, author, pages, read, timeStr, id) {
-    this.title = title;
-    this.author = author;
-    this.page = pages;
-    this.read = read;
-    this.timeStr = timeStr;
-    this.id = id;
-}
+// function Book(title, author, pages, read, timeStr, id) {
+//     this.title = title;
+//     this.author = author;
+//     this.page = pages;
+//     this.read = read;
+//     this.timeStr = timeStr;
+//     this.id = id;
+// }
 
-// Create a book obj and store it in the storage arr
-function addBookToLibrary(title, author, pages, read, timeObj, id) {
-    // process timeObj to get timestring
-    const formatter = new Intl.DateTimeFormat("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        weekday: "short"
-    });
-    const timeStr = formatter.format(timeObj);
+// Book prototype built from class
 
-    // create Book obj
-    const tempBookObj = new Book(title, author, pages, read, timeStr, id);
-
-    // append Book obj
-    myLibrary.push(tempBookObj);
-}
-
-// Add/remove hint paragraph
-function checkLibEmpty(){
-    if (library.children.length == 1) {
-        const hintPara = document.createElement("p");
-        hintPara.textContent = "Nothing to look here! Click on the button below to add books📖";
-        hintPara.classList.add("hint");
-        hintPara.setAttribute("style", "position: absolute; left: 20%; top: 50%; font-size: 3.5rem");
-        library.appendChild(hintPara);
+class Book {
+    constructor(title, author, pages, read, timeStr, id){
+        this.title = title;
+        this.author = author;
+        this.page = pages;
+        this.read = read;
+        this.timeStr = timeStr;
+        this.id = id;
     }
 
-    else {
-        const hintDel = library.querySelector(".hint");
-        if (hintDel) hintDel.remove();
+    static addBookToLibrary(title, author, pages, read, timeObj, id) {
+        // process timeObj to get timestring
+        const formatter = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            weekday: "short"
+        });
+        const timeStr = formatter.format(timeObj);
+
+        // create Book obj
+        const tempBookObj = new Book(title, author, pages, read, timeStr, id);
+
+        // append Book obj
+        myLibrary.push(tempBookObj);
+    }
+
+    static checkLibEmpty(){
+        if (library.children.length == 1) {
+            const hintPara = document.createElement("p");
+            hintPara.textContent = "Nothing to look here! Click on the button below to add books📖";
+            hintPara.classList.add("hint");
+            hintPara.setAttribute("style", "position: absolute; left: 20%; top: 50%; font-size: 3.5rem");
+            library.appendChild(hintPara);
+        }
+
+        else {
+            const hintDel = library.querySelector(".hint");
+            if (hintDel) hintDel.remove();
+        }
     }
 }
+
+
 
 // iterate storage arr and display book
 function updateLibraryDisplay(){
