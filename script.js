@@ -5,20 +5,6 @@ const appendBtn = document.querySelector("button.append");
 const dialog = document.querySelector("dialog");
 const form = dialog.querySelector("form");
 
-// Book storage array
-let myLibrary = [];
-
-// Book Prototype to create book objs
-// function Book(title, author, pages, read, timeStr, id) {
-//     this.title = title;
-//     this.author = author;
-//     this.page = pages;
-//     this.read = read;
-//     this.timeStr = timeStr;
-//     this.id = id;
-// }
-
-// Book prototype built from class
 
 class Book {
     constructor(title, author, pages, read, timeStr, id){
@@ -29,6 +15,8 @@ class Book {
         this.timeStr = timeStr;
         this.id = id;
     }
+
+    static #myLibrary = [];
 
     static addBookToLibrary(title, author, pages, read, timeObj, id) {
         // process timeObj to get timestring
@@ -46,7 +34,7 @@ class Book {
         const tempBookObj = new Book(title, author, pages, read, timeStr, id);
 
         // append Book obj
-        myLibrary.push(tempBookObj);
+        Book.#myLibrary.push(tempBookObj);
     }
 
     static checkLibEmpty(){
@@ -63,66 +51,64 @@ class Book {
             if (hintDel) hintDel.remove();
         }
     }
-}
 
-
-
-// iterate storage arr and display book
-function updateLibraryDisplay(){
-    // clean all book-cards first
-    const childArr = Array.from(library.children);
-    childArr.forEach(child => {
-        if (child.tagName == "DIV") {
-            child.remove();
-        }
-    });
-
-    // iterate over library arr
-    myLibrary.forEach(bookObj => {
-
-        // clone a node from template
-        const tempBookCard = bookCardTemp.content.cloneNode(true);
-        const bookCardNode = tempBookCard.querySelector(".book-card");
-
-        // populate the text fields
-        tempBookCard.querySelector(".name").textContent = bookObj.title;
-        tempBookCard.querySelector(".author").textContent = bookObj.author;
-        tempBookCard.querySelector(".pages").textContent = bookObj.page;
-        tempBookCard.querySelector(".time").textContent = bookObj.timeStr;
-
-        // toggle read attr and check the box
-        if (bookObj.read) {
-            bookCardNode.classList.add("read");
-            tempBookCard.querySelector("input").checked = true;
-        }
-
-        // add eventlistener for read & remove button
-        tempBookCard.querySelector("input").addEventListener("change", () => {
-            bookCardNode.classList.toggle("read");
-        });
-
-        const cancelDialog = tempBookCard.querySelector("dialog");
-        tempBookCard.querySelector(".bookTitle").textContent = bookObj.title + "?";
-
-        tempBookCard.querySelector(".remove").addEventListener("click", ()=> {
-            cancelDialog.showModal();
-        })
-
-        cancelDialog.addEventListener("close", ()=>{
-            // perform deletion
-            if (cancelDialog.returnValue) {
-                myLibrary = myLibrary.filter(bookObj => bookObj.id != bookCardNode.id);
-                updateLibraryDisplay();
+    // iterate storage arr and display book
+    static updateLibraryDisplay(){
+        // clean all book-cards first
+        const childArr = Array.from(library.children);
+        childArr.forEach(child => {
+            if (child.tagName == "DIV") {
+                child.remove();
             }
         });
 
-        // set id
-        bookCardNode.id = bookObj.id;
+        // iterate over library arr
+        Book.#myLibrary.forEach(bookObj => {
 
-        library.appendChild(tempBookCard);
-    })
+            // clone a node from template
+            const tempBookCard = bookCardTemp.content.cloneNode(true);
+            const bookCardNode = tempBookCard.querySelector(".book-card");
 
-    checkLibEmpty();
+            // populate the text fields
+            tempBookCard.querySelector(".name").textContent = bookObj.title;
+            tempBookCard.querySelector(".author").textContent = bookObj.author;
+            tempBookCard.querySelector(".pages").textContent = bookObj.page;
+            tempBookCard.querySelector(".time").textContent = bookObj.timeStr;
+
+            // toggle read attr and check the box
+            if (bookObj.read) {
+                bookCardNode.classList.add("read");
+                tempBookCard.querySelector("input").checked = true;
+            }
+
+            // add eventlistener for read & remove button
+            tempBookCard.querySelector("input").addEventListener("change", () => {
+                bookCardNode.classList.toggle("read");
+            });
+
+            const cancelDialog = tempBookCard.querySelector("dialog");
+            tempBookCard.querySelector(".bookTitle").textContent = bookObj.title + "?";
+
+            tempBookCard.querySelector(".remove").addEventListener("click", ()=> {
+                cancelDialog.showModal();
+            })
+
+            cancelDialog.addEventListener("close", ()=>{
+                // perform deletion
+                if (cancelDialog.returnValue) {
+                    Book.#myLibrary = Book.#myLibrary.filter(bookObj => bookObj.id != bookCardNode.id);
+                    Book.updateLibraryDisplay();
+                }
+            });
+
+            // set id
+            bookCardNode.id = bookObj.id;
+
+            library.appendChild(tempBookCard);
+        })
+
+        Book.checkLibEmpty();
+    }
 }
 
 
@@ -143,9 +129,9 @@ dialog.addEventListener("close", ()=> {
         const id = crypto.randomUUID();
 
         // call helper func
-        addBookToLibrary(title, author, page, read, currTime, id);
+        Book.addBookToLibrary(title, author, page, read, currTime, id);
 
-        updateLibraryDisplay();
+        Book.updateLibraryDisplay();
     }
 
     form.reset();
@@ -153,5 +139,5 @@ dialog.addEventListener("close", ()=> {
 })
 
 // Check intial empty state
-checkLibEmpty();
+Book.checkLibEmpty();
 
