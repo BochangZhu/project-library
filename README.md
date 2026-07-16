@@ -4,15 +4,15 @@ A vanilla HTML, CSS, and JavaScript project from [The Odin Project](https://www.
 
 ## Video Demo
 
-
+https://github.com/user-attachments/assets/323dbc92-01d2-4560-a6a1-fc9cca1002f9
 
 ## Features
 
 - Add books with title, author, page count, and read status
 - Toggle a book's read/unread status
-- Remove a book, with a confirmation window.
+- Remove a book, with a confirmation window
 - Responsive grid layout
-- Book data stored in an array by JS object.
+- Book data stored in an array by JS object
 
 ---
 
@@ -30,7 +30,7 @@ Adding a new book is handled entirely with a `<dialog>` element and a `<form>` i
 - The form's built-in validation (`required`, `min`/`max`) checks for valid input.
 - `FormData` is used to organize form result, which are then transferred into a new book object and pushed into `myLibrary`.
 
-`The same `<dialog>` and form pattern is reused for delete confirmations as well.`
+The same `<dialog>` and form pattern is reused for delete confirmations as well.
 
 ### Layout
 
@@ -45,12 +45,8 @@ CSS Grid and Flexbox are used throughout:
 
 ---
 
-## About
-
-This was my first real hands-on experience with "backend" logic. Every book is stored as an object in `myLibrary` array. Each time a book is added or removed, the array is updated first, then the book-card container is rendered based on objects inside the `myLibrary` array.
-
 ## Built With
 
 - HTML5
 - CSS3
-- JavaScript
+- Vanilla JavaScript
